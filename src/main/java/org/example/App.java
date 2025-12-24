@@ -3,7 +3,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 
 public class App {
-    public static void main(String[] args) throws IllegalAccessException {
+    public static void main(String[] args)  {
         Person person1 = new Person("name1", 20);
         Person person2 = new Person("name2", 25);
         Student student1 = new Student(person1, 1);
@@ -12,7 +12,11 @@ public class App {
         group1.addStudent(student1);
         group1.addStudent(student2);
         System.out.println(group1);
-        System.out.println(createJson(group1));
+        try {
+            System.out.println(createJson(group1));
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
     private static String createJson(Object obj) throws IllegalAccessException {
         Class<?> cls = obj.getClass();
